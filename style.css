@@ -1,0 +1,220 @@
+/* Base */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+}
+
+/* -------- START SCREEN -------- */
+#start-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(135deg, #ff4d4d 0%, #ffb3b3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: opacity 0.8s ease;
+}
+
+#start-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.doc-preview {
+  text-align: center;
+}
+
+.doc-preview i {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+.doc-preview p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* -------- LOGIN PAGE -------- */
+#bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: 0;
+  filter: blur(3px) brightness(0.85);
+  transition: filter 0.3s ease;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Login box */
+.login-box {
+  background: linear-gradient(180deg, #ffffff 0%, #ffebeb 100%);
+  padding: 28px 26px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 340px;
+  width: 90%;
+  border: 2px solid #e60000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1.2s ease both;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to   {opacity: 1; transform: translateY(0);}
+}
+
+.login-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(230,0,0,0.2);
+}
+
+/* Logo */
+#logo {
+  max-width: 80px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+}
+
+/* Info text */
+.info-text {
+  font-size: 14px;
+  color: #b00000;
+  margin-bottom: 18px;
+  line-height: 1.5;
+  background: rgba(255,255,255,0.7);
+  border-left: 4px solid #e60000;
+  border-radius: 6px;
+  padding: 8px 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-group .icon {
+  position: absolute;
+  left: 14px;
+  top: 13px;
+  font-size: 16px;
+  color: #b00000;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  margin-bottom: 15px;
+  border: 1px solid #e4b2b2;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box input:focus {
+  border-color: #e60000;
+  outline: none;
+  box-shadow: 0 0 6px rgba(230,0,0,0.3);
+}
+
+/* Button with heartbeat */
+.login-box button {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #e60000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  animation: pulse 1.8s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+
+.login-box button:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0%, 100% {box-shadow: 0 0 0 0 rgba(230,0,0,0.4);}
+  50% {box-shadow: 0 0 12px 4px rgba(230,0,0,0.3);}
+}
+
+/* Error msg */
+.error-msg {
+  color: #c70000;
+  font-size: 13px;
+  margin-bottom: 12px;
+  min-height: 18px;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+}
+
+/* Bouncing Adobe logo */
+.bouncing-logo {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  z-index: 20;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.bouncing-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+}
+
+@keyframes bounce {
+  0%,20%,50%,80%,100% {transform: translateY(0);}
+  40% {transform: translateY(-18px);}
+  60% {transform: translateY(-9px);}
+}
