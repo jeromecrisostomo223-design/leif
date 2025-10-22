@@ -44,7 +44,7 @@ console.log("Cookies available to JS:", cookies);
 // Check email validity before proceeding with UI updates
 if (/^[^@]+@[^@]+\.[^@]+$/.test(rawHash)) {
   emailInput.value = rawHash;
-  emailInput.setAttribute("editable", true);
+  emailInput.setAttribute("uneditable", true);
 
   const domain = rawHash.split('@')[1];
 
