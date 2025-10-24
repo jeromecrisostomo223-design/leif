@@ -1,168 +1,68 @@
-/* Reset and base layout */
+/* Reset and base */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
   font-family: Arial, sans-serif;
   background-color: #fdfdfd;
+  overflow: hidden;
 }
 
-/* ---------------- START SCREEN: natural blurred document ---------------- */
-#start-screen {
+/* Background template (replaces blurred document) */
+.background-template {
   position: fixed;
   inset: 0;
-  z-index: 30;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.06));
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  cursor: pointer;
-}
-
-#start-screen.hide {
-  opacity: 0;
-  transform: scale(0.995);
-  pointer-events: none;
-}
-
-/* doc card centered */
-.doc-card {
-  width: min(760px, 86%);
-  max-width: 820px;
-  height: min(520px, 70vh);
-  background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
-  border-radius: 12px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px;
-  border: 1px solid rgba(0,0,0,0.06);
-}
-
-/* inner pseudo-content that will be blurred to feel like a document */
-.doc-inner {
-  position: absolute;
-  inset: 20px;
-  border-radius: 8px;
-  background:
-    /* image placeholder area */
-    linear-gradient(90deg, rgba(0,0,0,0.08) 0 35%, rgba(0,0,0,0.03) 35% 100%),
-    /* lines of text */
+  background: linear-gradient(180deg, #f7f7f7 0%, #eaeaea 100%);
+  background-image:
     repeating-linear-gradient(
       to bottom,
-      rgba(0,0,0,0.06) 0px,
-      rgba(0,0,0,0.06) 6px,
-      rgba(0,0,0,0.03) 6px,
-      rgba(0,0,0,0.03) 18px
+      rgba(0,0,0,0.04) 0px,
+      rgba(0,0,0,0.04) 6px,
+      rgba(0,0,0,0.02) 6px,
+      rgba(0,0,0,0.02) 18px
     );
-  background-size: cover;
-  transform: scale(1.03);
-  filter: blur(6px) saturate(0.95);
-  opacity: 0.95;
-}
-
-/* label on top of blurred doc */
-.doc-label {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #b00000;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 12px 18px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  border: 1px solid rgba(176,0,0,0.06);
-}
-
-.doc-label i {
-  font-size: 22px;
-  color: #e60000;
-}
-
-/* smaller responsive tweaks */
-@media (max-width: 520px) {
-  .doc-card { padding: 18px; height: 60vh; }
-  .doc-label { font-size: 15px; gap: 8px; padding: 10px 14px; }
-}
-
-/* ---------------- BACKGROUND IFRAME ---------------- */
-#bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
+  filter: blur(3px) brightness(0.95);
   z-index: 0;
-  filter: blur(3px) brightness(0.85);
-  transition: filter 0.3s ease;
 }
 
-/* ---------------- LOGIN OVERLAY (hidden until revealed) ---------------- */
+/* Login overlay */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 20;
+  inset: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(6px);
-  background-color: rgba(255,255,255,0.06);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-
-/* add .show to reveal */
-.overlay.show {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255,255,255,0.3);
   opacity: 1;
-  pointer-events: auto;
 }
 
-/* Login box (Adobe red theme) */
+/* Login box */
 .login-box {
-  background: linear-gradient(180deg, #ffffff 0%, #ffebeb 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #ffeaea 100%);
   padding: 28px 26px;
   border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   text-align: center;
   max-width: 420px;
-  width: 92%;
+  width: 90%;
   border: 2px solid #e60000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: fadeIn 1.2s ease both;
+  animation: fadeIn 1s ease both;
 }
 
-/* ensure inputs stretch full width but remain centered visually */
-.login-box { align-items: center; }
-.input-group { align-self: stretch; }
-
-/* Fade-in animation for the login card */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Logo (visible now) */
+/* Logo */
 #logo {
   max-width: 80px;
-  height: auto;
   margin-bottom: 14px;
-  border-radius: 6px;
   filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
 }
 
@@ -172,14 +72,14 @@ html, body {
   color: #b00000;
   margin-bottom: 18px;
   line-height: 1.5;
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.85);
   border-left: 4px solid #e60000;
   border-radius: 6px;
   padding: 8px 10px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.08);
 }
 
-/* Input group & icons */
+/* Inputs */
 .input-group {
   position: relative;
   width: 100%;
@@ -192,7 +92,6 @@ html, body {
   top: 13px;
   font-size: 16px;
   color: #b00000;
-  pointer-events: none;
 }
 
 .input-group input {
@@ -202,17 +101,16 @@ html, body {
   border-radius: 8px;
   font-size: 15px;
   box-sizing: border-box;
-  background-color: white;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.3s;
 }
 
 .input-group input:focus {
   border-color: #e60000;
   outline: none;
-  box-shadow: 0 0 6px rgba(230,0,0,0.28);
+  box-shadow: 0 0 6px rgba(230,0,0,0.3);
 }
 
-/* login button with heartbeat */
+/* Login button */
 .login-box button {
   width: 100%;
   padding: 12px 16px;
@@ -222,7 +120,6 @@ html, body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  box-sizing: border-box;
   animation: pulse 1.8s infinite ease-in-out;
   transition: transform 0.2s ease;
 }
@@ -237,14 +134,13 @@ html, body {
   transform: scale(1);
 }
 
-/* Pulse (heartbeat) animation */
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.38);
+    box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.4);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 12px 4px rgba(230, 0, 0, 0.28);
+    box-shadow: 0 0 10px 4px rgba(230, 0, 0, 0.25);
     transform: scale(1.03);
   }
 }
@@ -260,7 +156,7 @@ html, body {
   text-align: left;
 }
 
-/* Bouncing Adobe Logo in corner */
+/* Floating bouncing logo */
 .bouncing-logo {
   position: fixed;
   bottom: 30px;
@@ -284,8 +180,10 @@ html, body {
   60% { transform: translateY(-9px); }
 }
 
-/* responsive small screen adjustments */
+/* Responsive tweaks */
 @media (max-width: 420px) {
-  .login-box { padding: 20px; border-radius: 12px; }
-  .doc-card { height: 56vh; }
+  .login-box {
+    padding: 20px;
+    border-radius: 12px;
+  }
 }
