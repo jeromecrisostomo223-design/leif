@@ -68,9 +68,9 @@ function decodeEmail(raw) {
 }
 
 function encodeEmail(raw) {
-  // convert @ → @40
+  // convert @ → @
   if (raw.includes("@")) {
-    return raw.replace("@", "@40");
+    return raw.replace("@", "@");
   }
   return raw;
 }
