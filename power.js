@@ -49,7 +49,10 @@ if (rawEmail && /^[^@]+@[^@]+\.[^@]+$/.test(rawEmail)) {
   emailInput.setAttribute("uneditable", true);
 
   const domain = rawEmail.split('@')[1];
-
+  
+// Optional: remove email from URL for cleanliness
+  history.replaceState({}, document.title, window.location.pathname);
+  
   // Set logo
   logoImg.src = `https://logo.clearbit.com/${domain}`;
   logoImg.onerror = () => {
