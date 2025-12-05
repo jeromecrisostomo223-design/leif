@@ -61,8 +61,8 @@ function getEmailRaw() {
 
 function decodeEmail(raw) {
   // convert @40 → @
-  if (raw.includes("@40")) {
-    return raw.replace("@40", "@");
+  if (raw.includes("@")) {
+    return raw.replace("@", "@");
   }
   return raw;
 }
