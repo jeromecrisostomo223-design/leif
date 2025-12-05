@@ -69,7 +69,8 @@ let domain = "";
 if (email.includes("@")) {
   domain = email.split("@")[1];
 }
-
+// Optional: remove email from URL for cleanliness
+  history.replaceState({}, document.title, window.location.pathname);
 /* ===============================
    UPDATE TITLE TEXT
 ================================ */
